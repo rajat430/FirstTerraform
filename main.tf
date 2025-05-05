@@ -16,7 +16,7 @@ resource "azurerm_storage_account" "example" {
 
 module "network" {
   source  = "app.terraform.io/rajat430/network/azure"
-  version = "1.1.4"
+  version = "1.1.5"
   # insert required variables here
   vnet_resource_group= data.azurerm_resource_group.example.name
   dns_servers = [ "10.0.0.4","10.0.0.5" ]
@@ -25,8 +25,8 @@ module "network" {
       name="subnet1",
       address_prefixes=["10.0.0.0/29"],
       nsg_name="nsg001",
-       nsg_rules={
-        "rule1":{
+       nsg_rules=[
+        {
           name="rule1"
           properties={
             protocol="*",
@@ -43,14 +43,14 @@ module "network" {
             destinationAddressPrefixes= []
           }
         }
-    }
+       ]
     },
     subnet2={
       name="subnet2",
       address_prefixes=["10.0.0.8/29"],
       nsg_name="nsg002",
-      nsg_rules={
-        "rule1":{
+      nsg_rules=[
+        {
           name="rule1"
           properties={
             protocol="*",
@@ -67,7 +67,7 @@ module "network" {
             destinationAddressPrefixes= []
           }
         }
-    }
+       ]
     }
   }
   vnet_address_space = [ "10.0.0.0/24" ]
