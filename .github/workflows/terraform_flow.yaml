@@ -40,6 +40,10 @@ jobs:
       - name: command line
         run: |
           ls -ltr
+          export ${{secrets.TF_SUBSCRIPTION_ID}}
+          export ${{secrets.TF_CLIENT_SECRET}}
+          export ${{secrets.TF_client_id}}
+          export ${{secrets.TF_TENANT_ID}}
           terraform init
           terraform plan -var-file=variables-dev.tfvars --out=tfplan.out 
           terraform apply tfplan.out
