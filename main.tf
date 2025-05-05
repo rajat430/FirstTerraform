@@ -25,7 +25,7 @@ module "network" {
       name="subnet1",
       address_prefixes=["10.0.0.0/29"],
       nsg_name="nsg001",
-      nsg_rules=[
+      nsg_rules=toset([
         {
           name="rule1"
           properties={
@@ -43,13 +43,13 @@ module "network" {
             destinationAddressPrefixes= [] 
           }
         }
-      ]
+      ])
     },
     subnet2={
       name="subnet2",
       address_prefixes=["10.0.0.8/29"],
       nsg_name="nsg002",
-      nsg_rules=[
+      nsg_rules=toset([
         {
           name="rule1"
           properties={
@@ -67,7 +67,7 @@ module "network" {
             destinationAddressPrefixes= []
           }
         }
-      ]
+      ])
     }
   }
   vnet_address_space = [ "10.0.0.0/24" ]
