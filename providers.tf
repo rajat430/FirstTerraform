@@ -6,12 +6,12 @@ terraform {
     }
   }
 
-  # cloud { 
-  #   organization = "rajat430" 
-  #   workspaces { 
-  #     name = "dev"
-  #   } 
-  # } 
+  cloud { 
+    organization = "rajat430" 
+    workspaces { 
+      name = "dit"
+    } 
+  } 
   
 }
 
