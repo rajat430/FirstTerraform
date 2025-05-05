@@ -16,7 +16,7 @@ resource "azurerm_storage_account" "example" {
 
 module "network" {
   source  = "app.terraform.io/rajat430/network/azure"
-  version = "1.1.3"
+  version = "1.1.4"
   # insert required variables here
   vnet_resource_group= data.azurerm_resource_group.example.name
   dns_servers = [ "10.0.0.4","10.0.0.5" ]
@@ -25,32 +25,8 @@ module "network" {
       name="subnet1",
       address_prefixes=["10.0.0.0/29"],
       nsg_name="nsg001",
-      nsg_rules=toset([
-        {
-          name="rule1"
-          properties={
-            protocol="*",
-            sourcePortRange= "*"
-            destinationPortRange= "8090"
-            sourceAddressPrefix="*"
-            destinationAddressPrefix= "*"
-            access= "Allow"
-            priority= 1002
-            direction= "Inbound"
-            sourcePortRanges= []
-            destinationPortRanges= []
-            sourceAddressPrefixes= []
-            destinationAddressPrefixes= [] 
-          }
-        }
-      ])
-    },
-    subnet2={
-      name="subnet2",
-      address_prefixes=["10.0.0.8/29"],
-      nsg_name="nsg002",
-      nsg_rules=toset([
-        {
+       nsg_rules={
+        "rule1":{
           name="rule1"
           properties={
             protocol="*",
@@ -67,7 +43,31 @@ module "network" {
             destinationAddressPrefixes= []
           }
         }
-      ])
+    }
+    },
+    subnet2={
+      name="subnet2",
+      address_prefixes=["10.0.0.8/29"],
+      nsg_name="nsg002",
+      nsg_rules={
+        "rule1":{
+          name="rule1"
+          properties={
+            protocol="*",
+            sourcePortRange= "*"
+            destinationPortRange= "8090"
+            sourceAddressPrefix="*"
+            destinationAddressPrefix= "*"
+            access= "Allow"
+            priority= 1002
+            direction= "Inbound"
+            sourcePortRanges= []
+            destinationPortRanges= []
+            sourceAddressPrefixes= []
+            destinationAddressPrefixes= []
+          }
+        }
+    }
     }
   }
   vnet_address_space = [ "10.0.0.0/24" ]
