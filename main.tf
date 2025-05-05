@@ -16,7 +16,7 @@ resource "azurerm_storage_account" "example" {
 
 module "network" {
   source  = "app.terraform.io/rajat430/network/azure"
-  version = "1.1.0"
+  version = "1.1.1"
   # insert required variables here
   vnet_resource_group= data.azurerm_resource_group.example.name
   dns_servers = [ "10.0.0.4","10.0.0.5" ]
