@@ -1,0 +1,85 @@
+on: push
+name: terraform_ci-cd
+run-name: ubuntu-latest
+jobs:
+  dev:
+    name: init
+    runs-on: ubuntu-latest
+    environment: dit
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: prepare_provider
+        run: |
+          cat <<EOF > providers.tf
+          terraform { 
+          required_providers {
+          azurerm = {
+            source = "hashicorp/azurerm"
+            version = "=4.9.0"
+          }
+          }
+          cloud { 
+            organization = "rajat430" 
+            workspaces { 
+              name = "${{vars.workspace}}"
+            } 
+          } 
+          }
+          provider "azurerm" {
+            features {}
+              resource_provider_registrations = "none"
+          }
+          EOF
+          cat providers.tf
+          ls
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
+      - name: command line
+        run: |
+          ls -ltr
+          terraform init
+          terraform plan -var-file=variables-dev.tfvars --out=tfplan.out 
+          terraform apply tfplan.out
+  test:
+    name: init
+    runs-on: ubuntu-latest
+    environment: test
+    needs: dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: provider_creation
+        run: |
+          cat <<EOF > providers.tf
+          terraform { 
+          required_providers {
+          azurerm = {
+          source = "hashicorp/azurerm"
+          version = "=4.9.0"
+            }
+          }
+          cloud { 
+            organization = "rajat430" 
+            workspaces { 
+              name = "${{vars.workspace}}"
+            } 
+          } 
+          }
+          provider "azurerm" {
+            features {}
+              resource_provider_registrations = "none"
+          }
+          EOF
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
+      - name: command line
+        run: |
+          ls -ltr
+          terraform init
+          terraform plan -var-file=variables-test.tfvars --out=tfplan.out
+          terraform apply tfplan.out
