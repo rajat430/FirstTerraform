@@ -71,5 +71,5 @@ module "network" {
     }
   }
   vnet_address_space = [ "10.0.0.0/24" ]
-  vnet_name = "vnet001"
+  vnet_name = "vnet001" 
 }
