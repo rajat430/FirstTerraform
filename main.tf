@@ -26,21 +26,21 @@ module "network" {
       address_prefixes=["10.0.0.0/29"],
       nsg_name="nsg001",
       nsg_rules={
-        "rule1":{
+         "rule1":{
           name="rule1"
           properties={
-            protocol: "*",
-            sourcePortRange: "*"
-            destinationPortRange: "8090"
-            sourceAddressPrefix: "*"
-            destinationAddressPrefix: "*"
-            access: "Allow"
-            priority: 1002
-            direction: "Inbound"
-            sourcePortRanges: []
-            destinationPortRanges: []
-            sourceAddressPrefixes: []
-            destinationAddressPrefixes: []
+            protocol="*",
+            sourcePortRange= "*"
+            destinationPortRange= "8090"
+            sourceAddressPrefix="*"
+            destinationAddressPrefix= "*"
+            access= "Allow"
+            priority= 1002
+            direction= "Inbound"
+            sourcePortRanges= []
+            destinationPortRanges= []
+            sourceAddressPrefixes= []
+            destinationAddressPrefixes= []
           }
         }
       }
@@ -53,18 +53,18 @@ module "network" {
         "rule1":{
           name="rule1"
           properties={
-            protocol: "*",
-            sourcePortRange: "*"
-            destinationPortRange: "8090"
-            sourceAddressPrefix: "*"
-            destinationAddressPrefix: "*"
-            access: "Allow"
-            priority: 1002
-            direction: "Inbound"
-            sourcePortRanges: []
-            destinationPortRanges: []
-            sourceAddressPrefixes: []
-            destinationAddressPrefixes: []
+            protocol="*",
+            sourcePortRange= "*"
+            destinationPortRange= "8090"
+            sourceAddressPrefix="*"
+            destinationAddressPrefix= "*"
+            access= "Allow"
+            priority= 1002
+            direction= "Inbound"
+            sourcePortRanges= []
+            destinationPortRanges= []
+            sourceAddressPrefixes= []
+            destinationAddressPrefixes= []
           }
         }
       }
