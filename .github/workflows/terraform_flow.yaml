@@ -41,8 +41,8 @@ jobs:
         run: |
           ls -ltr
           terraform init
-          terraform plan 
-          terraform apply -auto-aprove -input=false
+          terraform plan -var-file=variables-dev.tfvars --out=tfplan.out 
+          terraform apply tfplan.out
   test:
     name: init
     runs-on: ubuntu-latest
@@ -64,7 +64,7 @@ jobs:
           cloud { 
             organization = "rajat430" 
             workspaces { 
-              name = "${{vars.workspace}}" 
+              name = "${{vars.workspace}}"
             } 
           } 
           }
