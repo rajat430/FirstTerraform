@@ -40,7 +40,7 @@ module "network" {
             sourcePortRanges= []
             destinationPortRanges= []
             sourceAddressPrefixes= []
-            destinationAddressPrefixes= []
+            destinationAddressPrefixes= [] 
           }
         }
       ]
