@@ -9,7 +9,7 @@ terraform {
   cloud { 
     organization = "rajat430" 
     workspaces { 
-      name = "dit"
+      name = "dit-cli"
     } 
   } 
   
