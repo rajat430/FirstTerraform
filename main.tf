@@ -1,5 +1,5 @@
 data "azurerm_resource_group" "example" {
-  name     = "1-7c56a92e-playground-sandbox"
+  name     = "1-68a120af-playground-sandbox"
 }
 
 resource "azurerm_storage_account" "example" {
